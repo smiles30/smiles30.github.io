@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lab 02 Date-Time KEY</title>
+<script>
+var hours12=true;
+
+function getInfo ()
+{
+  const months = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"];
+  var date = new Date;
+  year = date.getFullYear();
+  month = months[date.getMonth()];
+  day = date.getDate();
+  minutes = date.getMinutes();
+  hours12 = ( document.getElementById("Hours").selectedIndex==0 ? true : false );
+  hour = date.getHours();
+  hour = (hours12 ? hour%12 : hour);
+  return [year,month,day,hour,minutes];
+}
+
+  function dateTimeA() {
+    let dayValues = getInfo();
+    alert("The date today is: "+dayValues[1]+" "+dayValues[2]+", "+dayValues[0]);
+    alert("and the current time is: "+dayValues[3]+":"+dayValues[4]);
+  }
+
+  function dateTimeP() {
+    let dayValues = getInfo();
+    document.querySelector("#dateOut").innerHTML=
+         "The date today is: "+dayValues[1]+" "+dayValues[2]+", "+dayValues[0]+"<br>"+
+         "and the current time is: "+dayValues[3]+":"+dayValues[4];
+  }
+</script>
+</head>
+
+<body>
+<button id="TimeAlert" onclick="dateTimeA()">Date-Time in Alert Pop-up</button>
+
+<button id="TimeOnPage" onclick="dateTimeP()">Date-Time on Page</button>
+
+<select id="Hours" size="1">
+    <option value="0">12 Hours</option>
+    <option value="1">24 Hours</option>
+</select>
+
+<div id="dateOut">
+    The count goes here.
+</div>
+
+</body>
+</html>
