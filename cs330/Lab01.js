@@ -16,5 +16,5 @@ for(var i = 0; i < array.length; i++){
 	}
 }
 
+document.querySelector("#arrayOut").innerHTML = "The array is: " + array <br> + "The mean is: " + mean <br> + "Greater: " + greater;
 }
-document.querySelector('#arrayOut').innerHTML = "The array is: " + array <br> + "The mean is: " + mean <br> + "Greater: " + greater;
