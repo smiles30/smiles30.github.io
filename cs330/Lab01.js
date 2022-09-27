@@ -1,14 +1,13 @@
 function labArray(){
 var array = [];
+var mean = 0;
 for (var i = 0; i < 5; i++){
 	var num = Math.floor(100*(Math.random()));
+	mean += num;
 	array.push(num);
 }
-var mean = 0;
-for (var i = 0; i < array.length; i++){
-	mean += array[i];
-}
-mean /= array.length;
+mean = mean/array.length;
+console.log(mean);
 var greater = [];
 for(var i = 0; i < array.length; i++){
 	if(array[i] > mean){
