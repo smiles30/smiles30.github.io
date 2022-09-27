@@ -7,7 +7,7 @@ for (var i = 0; i < 5; i++){
 	array.push(num);
 }
 mean = mean/array.length;
-console.log(mean);
+
 var greater = [];
 for(var i = 0; i < array.length; i++){
 	if(array[i] > mean){
