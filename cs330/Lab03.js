@@ -1,3 +1,5 @@
+var gl;
+var points;
 init();
 
 function init(){
@@ -9,6 +11,9 @@ function init(){
 
 	//create points here
 
+	points = [vec2(0,0), vec2(-0.5,0.5), vec3(0.5, -0.5)];
+	points.push(vec2(0,0.95));
+
 	//initialization
 
 	gl.viewport(0, 0, canvas.width, canvas.height);
@@ -19,8 +24,13 @@ function init(){
 	var program = initShaders(gl, "vertex-shader", "fragment-shader");
 	gl.useProgram(program);
 
+	//load data into gpu
+
 	var buffer = gl.createBuffer();
 	gl.bindBuffer(g1.ARRAY_BUFFER, buffer);
+	gl.bufferData(gl.ARRAY_BUFFER, flatten(points), gl.STATIC_DRAW);
+
+	//associate shader var with data buffer
 
 	var positionLoc = gl.getAttribLocation(program, "aPosition");
 	gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
@@ -31,5 +41,6 @@ function init(){
 
 function render(){
 	gl.clear(gl.COLOR_BUFFER_BIT);
-	gl.drawArrays(gl.TRIANGLES, 0, numPositions);
+	gl.drawArrays(gl.POINTS, 0, points.length);
+	//change gl.POINTS to gl.TRIANGLES, see what happens
 }
