@@ -28,7 +28,7 @@ function init(){
 	//load data into gpu
 
 	var bufferId = gl.createBuffer();
-	gl.bindBuffer(g1.ARRAY_BUFFER, bufferId);
+	gl.bindBuffer(gl.ARRAY_BUFFER, bufferId);
 	gl.bufferData(gl.ARRAY_BUFFER, flatten(points), gl.STATIC_DRAW);
 
 	//associate shader var with data buffer
