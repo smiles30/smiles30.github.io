@@ -12,7 +12,7 @@ function init(){
 
 	//create points here
 
-	points = [vec2(0,0), vec2(-0.95,-0.95), vec2(0.95, -0.95)];
+	points = [vec2(0,0), vec2(-0.5,-0.3), vec2(0.95, -0.25), vec2(0.1, 0.75)];
 	points.push(vec2(0,0.95));
 
 	//initialization
