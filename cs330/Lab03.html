@@ -2,7 +2,7 @@
 
 <head>
 
-<title>Lab 03 Try 3</title>
+<title>Lab 03 Try 4</title>
 
 </head>
 
@@ -10,19 +10,19 @@
 
 <canvas id="gl-canvas" width="512" height="512"></canvas>
 
-<script id="fragment-shader" type="x-shader/x-fragment">
-	precision highp float;
-	out vec4 fColor;
-	void main(){
-		fColor = vec4(1.0, 0.0, 0.0, 1.0);
-	}
-</script>
-
 <script id="vertex-shader" type="x-shader/x-vertex">
 	in vec4 aPosition;
 	void main(){
 		gl_PointSize = 4.0;
 		gl_Position = aPosition;
+	}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+	precision highp float;
+	out vec4 fColor;
+	void main(){
+		fColor = vec4(1.0, 0.0, 0.0, 1.0);
 	}
 </script>
 
