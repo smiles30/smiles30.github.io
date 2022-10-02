@@ -1,0 +1,51 @@
+<html>
+
+<head>
+
+<title>Lab 05 Try 1</title>
+
+</head>
+
+<body>
+
+<canvas id="gl-canvas" width="512" height="512" style=border>
+
+</canvas>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+#version 300 es
+in vec4 aPosition;
+out vec4 vColor;
+
+void main(){
+  gl_PointSize = 30.0;
+  gl_Position = aPosition;
+  //vColor = vec4(1.0,0.0,0.0,1.0);
+  vColor = vec4((1.0+aPosition.xyz)/2.0,1.0);
+}
+
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+#version 300 es
+precision mediump float;
+in vec4 vColor;
+out vec4 fColor;
+
+void main()
+{
+  fColor = vColor;
+  //gl_FragColor = vec4(1.0,0.0,0.0,1.0);
+}
+
+</script>
+
+<script type="text/javascript" src="cs330 Code For Moodle/cs330 Code For Moodle/Common/utility.js"></script>
+<script type="text/javascript" src="cs330 Code For Moodle/cs330 Code For Moodle/Common/initShaders.js"></script>
+<script type="text/javascript" src="cs330 Code For Moodle/cs330 Code For Moodle/Common/MVnew.js"></script>
+<script type="text/javascript" src="Lab05.js"></script>
+
+</body>
+</html>
