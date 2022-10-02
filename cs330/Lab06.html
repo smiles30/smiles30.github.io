@@ -1,0 +1,52 @@
+<html>
+
+<head>
+
+<title>Lab 06</title>
+
+</head>
+
+<body>
+
+<canvas id="gl-canvas" width="512" height="512" style=border></canvas>
+
+<div>
+expansion 1 <input id="slider" type="range" min="1" max="9" step="1"
+value="1"/> 9
+</div>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+#version 300 es
+in vec4 aPosition;
+in vec4 aColor;
+out vec4 vColor;
+
+void main(){
+  gl_PointSize = 20.0;
+  gl_Position = aPosition;
+  vColor = aColor;
+}
+
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+#version 300 es
+precision mediump float;
+in vec4 vColor;
+out vec4 fColor;
+
+void main()
+{
+  fColor = vColor;
+}
+
+</script>
+
+<script type="text/javascript" src="cs330 Code For Moodle/cs330 Code For Moodle/Common/initShaders.js"></script>
+<script type="text/javascript" src="cs330 Code For Moodle/cs330 Code For Moodle/Common/MVnew.js"></script>
+<script type="text/javascript" src="Lab06.js"></script>
+
+</body>
+</html>
