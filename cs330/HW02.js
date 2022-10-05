@@ -1,7 +1,7 @@
 // Samantha Miles
 // 5 October 2022
 // Changes that were made after seeing the lab key are noted in comments; the rest was done on my own
-// html file did not have errors needing fixed
+// The HTML file did not have errors needing fixed; red was replaced with purple, however, based on personal taste.
 
 "use strict";
 var gl;
