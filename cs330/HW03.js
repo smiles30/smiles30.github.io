@@ -4,7 +4,9 @@ var gl;
 
 var theta = 0.0;
 var thetaLoc;
-var delta = 0.01;
+var delta = 0.01; //key for reference
+
+// All colors were adjusted to personal preference
 
 var color = vec4(0.0, 0.0, 1.0, 1.0);
 var ucolor = vec4(1.0, 0.0, 1.0, 1.0);
@@ -34,7 +36,7 @@ function init(){
     var program = initShaders(gl, "vertex-shader", "fragment-shader");
     gl.useProgram(program);
 
-    var I = [
+    var I = [ // Had issues with formation of the I, looked at key for reference
         vec2(-0.75, 0.75),
         vec2(0.75, 0.75),
         vec2(0.75, 0.50),
