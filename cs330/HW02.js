@@ -1,3 +1,8 @@
+// Samantha Miles
+// 5 October 2022
+// Changes that were made after seeing the lab key are noted in comments; the rest was done on my own
+// html file did not have errors needing fixed
+
 "use strict";
 var gl;
 var positions;
@@ -9,6 +14,7 @@ function init(){
     var canvas = document.getElementById("gl-canvas");
 
     gl = canvas.getContext('webgl2');
+
 if(!gl){
 	alert("WebGL isn't available");
 }
@@ -45,8 +51,17 @@ document.getElementById("slider").onchange = function(event){
     render();
 };
 
-function divRecursive(left, right, slid){
-	var sqrt3d2 = 0.87; // Fixed with use of Key
+function divRecursive(left, right, slid){ // Made several fixes in function with use of Key
+
+//line split in segments 1/3 of line; recursion
+//each recursive step, "flat" third replaced w/triangle
+//h = length
+//0 = straight line, 1 = middle triangle, 2 = 3, 3 = 7
+//len = b - a (right minus left)
+//c.x = a + len
+//c.y = len * sqrt(3)/2
+
+	var sqrt3d2 = 0.87;
 	var p1 = mix(left, right, 0.33);
 	var p2 = mix(left, right, 0.67);
 
@@ -87,14 +102,6 @@ function render() {
 
     	gl.drawArrays(gl.LINES, 0, positions.length);
     	positions = [];
-
-//line split in segments 1/3 of line; recursion
-//each recursive step, "flat" third replaced w/triangle
-//h = length
-//0 = straight line, 1 = middle triangle, 2 = 3, 3 = 7
-//len = b - a (right minus left)
-//c.x = a + len
-//c.y = len * sqrt(3)/2
     
     //gl.drawArrays(gl.TRIANGLES, 0, sliderVal);
 }
