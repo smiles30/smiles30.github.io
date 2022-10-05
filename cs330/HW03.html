@@ -6,7 +6,7 @@
 
 <body>
 
-<button id="Rotation">Toggle Morph On-Off</button>
+<button id="morph">Toggle Morph On-Off</button>
 
 <canvas id="gl-canvas" width="512" height="512"> </canvas>
 
@@ -20,8 +20,8 @@ uniform float t;
 
 void main(){
 
-    gl_Position.x = -t*uPosition.y + t*iPosition.x;
-    gl_Position.y =  t*uPosition.x + t*iPosition.y;
+    gl_Position.x = (1.0-t)*uPosition.x + t*iPosition.x;
+    gl_Position.y =  (1.0-t)*uPosition.y + t*iPosition.y;
     gl_Position.z = 0.0;
     gl_Position.w = 1.0;
 

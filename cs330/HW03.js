@@ -93,7 +93,7 @@ function init(){
 
     // button listener here, toggle rotation
 
-	document.getElementById("Morph").onclick = function(){
+	document.getElementById("morph").onclick = function(){
 		morph = !(morph);
 	};
 
