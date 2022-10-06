@@ -1,3 +1,7 @@
+// Samantha Miles
+// 5 October 2022
+// Changes that were made after seeing the lab key are noted in comments; the rest was done on my own
+
 "use strict";
 
 var gl;
@@ -98,7 +102,7 @@ function init(){
 	document.getElementById("morph").onclick = function(){
 		morph = !(morph);
 	};
-
+// Looked to key on case 2 and 3
 	window.onkeydown = function(event){
 		var key = String.fromCharCode(event.keyCode);
 		switch(key){

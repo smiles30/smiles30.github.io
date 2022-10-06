@@ -19,7 +19,7 @@ in vec4 uPosition;
 uniform float t;
 
 void main(){
-
+// Looked at answer key to fix .x and .y positions
     gl_Position.x = (1.0-t)*uPosition.x + t*iPosition.x;
     gl_Position.y =  (1.0-t)*uPosition.y + t*iPosition.y;
     gl_Position.z = 0.0;
