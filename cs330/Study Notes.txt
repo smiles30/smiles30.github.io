@@ -5,3 +5,75 @@
 * Next week 10/10 and 10/12 asynchronous class (Moodle lectures 10/10, 10/12)
 * Lab 9, 10 Due 11/2
 * HW 04 Due 10/26
+
+***
+
+10/24: 
+
+(3 1	x	(5 6		((3x5)+(1x8), (3x6)+(1x7)		(23,25
+ 2 4)		 8 7)	=	 (2*5)+(4x8), (2x6)+(4x7))	=	 42,40)
+
+* Matrices = 4x4, 3D
+* Review Day 12 Lecture Video/Notes
+
+HW04 #2
+
+Rz(theta) = (cos(theta) 	sin(theta) 	0	0
+	     sin(theta)		cos(theta)	0	0
+	     0			0		0	0
+	     0			0		0	1)
+
+S(alpha,alpha,alpha) = (alpha	0	0	0
+			0	alpha	0	0
+			0	0	alpha	0
+			0	0	0	1)
+
+rz*s*aposition
+
+s*rz*aposition
+
+* HW04 -> Electronic submission, Microsoft Word or scan
+* It doesn't say to rotate for HW04 but you should! Show more than straight-on, 3D
+* JavaScript = column-major (transposed)
+* 
+
+***
+
+M 10/24: 
+
+* Research Project -> Look Up Times In Email! (Git) (Wed Class and Outside!)
+
+10:20-11:50) CONN Reading/Reflection, Check Calendly, Pill, Charge Devices
+12-2) Work, Get Lunch
+2-4) Psych Read Articles + Reflection Essay, Check Previous Grade
+4-5) ITS Project Mtg
+5-6) Sign Language Review Session, Study Sign
+6-7) Dinner
+Eve) Financial Stuff, Set Up Advisor Mtgs, Lab 9, Lab 10, HW04, Message D, Exercise
+
+* Lab 9, Lab 10, HW04 Programming Part (C4/C5 For Help)
+* CONN Reading/Reflection
+* Study Sign Language, Review Session?
+* Psych Read Articles + Reflection Essay, Check Previous Grade
+* ITS Project Mtg?
+
+T 10/25: 
+* Wash Hair
+* HW04 Written Part, Turn In
+* Psych Read Articles + Reflection Essay (Thurs)
+* CONN Reading/Reflection (Thursday)
+* Financial Stuff, Advisor Mtgs
+
+W 10/26: 
+* ITS Chapter Make-Up Work
+* ITS Project Mtg
+* ITS Chapter Quiz
+
+Th 10/27: 
+* ITS Weekly Work
+* ITS Chapter Make-Up Work
+* Lab 11, Lab 12, Lab 13
+* Anything Due This Weekend -> CONN Weekly Reflection, etc.
+
+Next Sunday: 
+* Lab 11, Lab 12, Lab 13, Lab 14, Lab 15?, Lab 16? (Due Wed!)

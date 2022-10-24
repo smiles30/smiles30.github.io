@@ -1,0 +1,56 @@
+<html>
+
+<title>HW04</title>
+
+</head>
+
+<body>
+
+<button id="morph">Toggle Morph On-Off</button>
+
+<canvas id="gl-canvas" width="512" height="512"> </canvas>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+<button id= "xButton">Rotate X</button>
+<button id= "yButton">Rotate Y</button>
+<button id= "zButton">Rotate Z</button>
+<button id = "tRotButton">Toggle Rotation</button>
+<button id = "tMorphButton">Toggle Morph On-Off</button>
+
+#version 300 es
+
+in vec4 iPosition;
+in vec4 uPosition;
+uniform float t;
+
+void main(){
+    gl_Position.x = (1.0-t)*uPosition.x + t*iPosition.x;
+    gl_Position.y =  (1.0-t)*uPosition.y + t*iPosition.y;
+    gl_Position.z = 0.0;
+    gl_Position.w = 1.0;
+
+}
+
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+#version 300 es
+
+precision mediump float;
+uniform vec4 aColor;
+out vec4 fColor;
+
+void main(){
+    fColor = aColor;
+}
+
+</script>
+
+<script src="cs330 Code For Moodle/cs330 Code For Moodle/Common/initShaders.js"></script>
+<script src="cs330 Code For Moodle/cs330 Code For Moodle/Common/MVnew.js"></script>
+<script src="HW04.js"></script>
+
+</body>
+
+</html>
