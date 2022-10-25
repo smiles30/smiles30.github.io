@@ -1,3 +1,6 @@
+//Samantha Miles
+//26 October 2022
+
 "use strict";
 
 var canvas;
@@ -13,14 +16,14 @@ var flag = true;
 var numElements = 29;
 
     var vertices = [
-        vec3(-0.5, -0.5,  0.5),
-        vec3(-0.5,  0.5,  0.5),
-        vec3(0.5,  0.5,  0.5),
-        vec3(0.5, -0.5,  0.5),
-        vec3(-0.5, -0.5, -0.5),
-        vec3(-0.5,  0.5, -0.5),
-        vec3(0.5,  0.5, -0.5),
-        vec3(0.5, -0.5, -0.5)
+        vec3(-0.5, -0.5,  0.5), //V[0]
+        vec3(-0.5,  0.5,  0.5), //V[1]
+        vec3(0.5,  0.5,  0.5), //V[2]
+        vec3(0.5, -0.5,  0.5), //V[3]
+        vec3(-0.5, -0.5, -0.5), //V[4]
+        vec3(-0.5,  0.5, -0.5), //V[5]
+        vec3(0.5,  0.5, -0.5), //V[6]
+        vec3(0.5, -0.5, -0.5) //V[7]
     ];
 
     var vertexColors = [
@@ -38,7 +41,7 @@ var numElements = 29;
 
 var indices = [
     1, 0, 3, 2, 255,
-    2, 3, 7, 2, 255,
+    2, 3, 7, 6, 255,
     3, 0, 4, 7, 255,
     6, 5, 1, 2, 255,
     4, 5, 6, 7, 255,
@@ -49,6 +52,30 @@ init();
 
 function init()
 {
+
+ //Bug: One face of cube is not properly fixed; one of 12 triangles not set right
+ //Fix: 2,3,7,2,255 -> 2,3,7,6,255
+
+ //Reduce numElements one at a time, what do you observe?
+ //Removing just one element, a triangle is visible on a face of the cube
+ //Removing 2 elements (n = 27), a whole face is gone
+ //Removing 3, 4, 5 elements (n = 26, 25, 24), no change?
+ //Removing 6 elements (n = 23), a triangle is visible on a cube face
+ //Removing 7 elements (n = 22), another face is gone
+ //Removing 8, 9, 10 elements (n = 21, 20, 19), no change?
+ //Removing 11 elements (n = 18), another triangle is visible
+ //Removing 12 elements (n = 17), another face is gone
+ //Removing 13, 14, 15 elements (n = 16, 15, 14), no change?
+ //Removing 16 elements (n = 13), another triangle is visible
+ //Removing 17 elements (n = 12), another face is gone
+ //Removing 18, 19, 20 elements (n = 11, 10, 9), no change?
+ //Removing 21 elements (n = 8), another triangle is visible
+ //Removing 22 elements (n = 7), another face is gone
+ //Removing 23, 24, 25 elements (n = 6, 5, 4), no change?
+ //Removing 26 elements (n = 3), another triangle is visible
+ //Removing 27 elements (n = 2), another face is gone
+ //Removing 28, 29 elements (n = 1, 0) no change?
+
     canvas = document.getElementById("gl-canvas");
 
     gl = canvas.getContext('webgl2');
@@ -111,7 +138,7 @@ function init()
     render();
 }
 
-function render() //Bug: Rotation when supposed to only move y axis
+function render()
 {
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
