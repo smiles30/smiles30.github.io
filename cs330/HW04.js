@@ -3,24 +3,84 @@
 
 "use strict";
 
+var canvas;
 var gl;
 
+var axis = 0;
+var xAxis = 0;
+var yAxis = 1;
+var zAxis = 2;
 var theta = 0.0;
+var thetaArr = [0, 0, 0];
 var thetaLoc;
 var delta = 0.01;
+var flag = true;
+var morph = false;
+var numElements = 29;
 
 var color = vec4(0.0, 0.0, 1.0, 1.0);
 var ucolor = vec4(1.0, 0.0, 1.0, 1.0);
 var icolor = vec4(0.0, 1.0, 0.0, 1.0);
 var colorLoc;
 
-var delay = 100;
-var morph = true;
+var I = [
+        vec3(0.75, 0.75, 0.5),
+        vec3(0.75, 0.50, 0.5),
+	vec3(0.25, 0.50, 0.5),
+	vec3(0.25, -0.50, 0.5),
+	vec3(0.75, -0.50, 0.5),
+	vec3(0.75, -0.75, 0.5),
+	vec3(-0.75, -0.75, 0.5),
+	vec3(-0.75, -0.50, 0.5),
+	vec3(-0.25, -0.50, 0.5),
+	vec3(-0.25, 0.50, 0.5),
+	vec3(-0.75, 0.50, 0.5),
+	vec3(-0.75, 0.75, 0.5),
+	vec3(0.75, 0.75, -0.5),
+        vec3(0.75, 0.50, -0.5),
+	vec3(0.25, 0.50, -0.5),
+	vec3(0.25, -0.50, -0.5),
+	vec3(0.75, -0.50, -0.5),
+	vec3(0.75, -0.75, -0.5),
+	vec3(-0.75, -0.75, -0.5),
+	vec3(-0.75, -0.50, -0.5),
+	vec3(-0.25, -0.50, -0.5),
+	vec3(-0.25, 0.50, -0.5),
+	vec3(-0.75, 0.50, -0.5),
+	vec3(-0.75, 0.75, -0.5)
+    ];
+
+    var U = [
+        vec3(-0.50, 0.50, 0.5),
+        vec3(-0.25, 0.50, 0.5),
+        vec3(-0.25, -0.25, 0.5),
+	vec3(0.25, -0.25, 0.5),
+	vec3(0.25, 0.50, 0.5),
+	vec3(0.50, 0.50, 0.5),
+	vec3(0.50, 0.00, 0.5),
+	vec3(0.50, -0.25, 0.5),
+	vec3(0.50, -0.50, 0.5),
+	vec3(-0.50, -0.50, 0.5),
+	vec3(-0.50, -0.25, 0.5),
+	vec3(-0.50, 0.00, 0.5),
+	vec3(-0.50, 0.50, -0.5),
+        vec3(-0.25, 0.50, -0.5),
+        vec3(-0.25, -0.25, -0.5),
+	vec3(0.25, -0.25, -0.5),
+	vec3(0.25, 0.50, -0.5),
+	vec3(0.50, 0.50, -0.5),
+	vec3(0.50, 0.00, -0.5),
+	vec3(0.50, -0.25, -0.5),
+	vec3(0.50, -0.50, -0.5),
+	vec3(-0.50, -0.50, -0.5),
+	vec3(-0.50, -0.25, -0.5),
+	vec3(-0.50, 0.00, -0.5)
+    ];
 
 init();
 
 function init(){
-    var canvas = document.getElementById("gl-canvas");
+    canvas = document.getElementById("gl-canvas");
 
     gl = canvas.getContext('webgl2');
     if(!gl){
@@ -32,40 +92,12 @@ function init(){
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(1.0, 1.0, 1.0, 1.0);
 
+    gl.enable(gl.DEPTH_TEST); //Check?
+
     //  Load shaders and initialize attribute buffers
 
     var program = initShaders(gl, "vertex-shader", "fragment-shader");
-    gl.useProgram(program);
-
-    var I = [
-        vec2(0.75, 0.75),
-        vec2(0.75, 0.50),
-	vec2(0.25, 0.50),
-	vec2(0.25, -0.50),
-	vec2(0.75, -0.50),
-	vec2(0.75, -0.75),
-	vec2(-0.75, -0.75),
-	vec2(-0.75, -0.50),
-	vec2(-0.25, -0.50),
-	vec2(-0.25, 0.50),
-	vec2(-0.75, 0.50),
-	vec2(-0.75, 0.75)
-    ];
-
-    var U = [
-        vec2(-0.50, 0.50),
-        vec2(-0.25, 0.50),
-        vec2(-0.25, -0.25),
-	vec2(0.25, -0.25),
-	vec2(0.25, 0.50),
-	vec2(0.50, 0.50),
-	vec2(0.50, 0.00),
-	vec2(0.50, -0.25),
-	vec2(0.50, -0.50),
-	vec2(-0.50, -0.50),
-	vec2(-0.50, -0.25),
-	vec2(-0.50, 0.00),
-    ];
+    gl.useProgram(program); //Errors
 
     // Load the data into the GPU
 
@@ -76,7 +108,7 @@ function init(){
     // Associate out shader variables with our data buffer
 
     var positionLocI = gl.getAttribLocation(program, "iPosition");
-    gl.vertexAttribPointer(positionLocI, 2, gl.FLOAT, false, 0, 0);
+    gl.vertexAttribPointer(positionLocI, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(positionLocI);
 
     var vBufferU = gl.createBuffer();
@@ -84,7 +116,7 @@ function init(){
     gl.bufferData(gl.ARRAY_BUFFER, flatten(U), gl.STATIC_DRAW);
 
     var positionLocU = gl.getAttribLocation(program, "uPosition");
-    gl.vertexAttribPointer(positionLocU, 2, gl.FLOAT, false, 0, 0);
+    gl.vertexAttribPointer(positionLocU, 3, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(positionLocU);
 
     thetaLoc = gl.getUniformLocation(program, "t");
@@ -95,22 +127,18 @@ function init(){
 
     // button listener here, toggle rotation
 
-	document.getElementById("morph").onclick = function(){
+    document.getElementById( "xButton" ).onclick = function () {
+        axis = xAxis;
+    };
+    document.getElementById( "yButton" ).onclick = function () {
+        axis = yAxis;
+    };
+    document.getElementById( "zButton" ).onclick = function () {
+        axis = zAxis;
+    };
+    document.getElementById("tRotButton").onclick = function(){flag = !flag;};
+    document.getElementById("tMorphButton").onclick = function(){
 		morph = !(morph);
-	};
-	window.onkeydown = function(event){
-		var key = String.fromCharCode(event.keyCode);
-		switch(key){
-			case "1": 
-				morph = !(morph);
-				break;
-			case "2": 
-				delta /= 2.0;
-				break;
-			case "3": 
-				delta *= 2.0;
-				break;
-		}
 	};
 
     render();
@@ -118,7 +146,7 @@ function init(){
 
 function render()
 {
-    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     if(morph==true){
 	theta += delta;
@@ -128,6 +156,8 @@ function render()
 	delta = -delta;
     }
 
+    //gl.uniform3f(thetaLoc, flatten(theta));
+
     gl.uniform1f(thetaLoc, theta);
 
     color = mix(icolor, ucolor, theta);
@@ -136,7 +166,9 @@ function render()
 
     gl.drawArrays(gl.LINE_LOOP, 0, 12);
 
-    setTimeout(
-        function (){requestAnimationFrame(render);}, delay
-    );
+    if(flag) thetaArr[axis] += 2.0;
+    gl.uniform3fv(thetaLoc, thetaArr);
+
+    gl.drawElements(gl.TRIANGLE_FAN, numElements, gl.UNSIGNED_BYTE, 0);
+    requestAnimationFrame(render);
 }

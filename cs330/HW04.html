@@ -6,11 +6,7 @@
 
 <body>
 
-<button id="morph">Toggle Morph On-Off</button>
-
 <canvas id="gl-canvas" width="512" height="512"> </canvas>
-
-<script id="vertex-shader" type="x-shader/x-vertex">
 
 <button id= "xButton">Rotate X</button>
 <button id= "yButton">Rotate Y</button>
@@ -18,11 +14,14 @@
 <button id = "tRotButton">Toggle Rotation</button>
 <button id = "tMorphButton">Toggle Morph On-Off</button>
 
+<script id="vertex-shader" type="x-shader/x-vertex">
+
 #version 300 es
 
 in vec4 iPosition;
 in vec4 uPosition;
 uniform float t;
+uniform vec3 uTheta;
 
 void main(){
     gl_Position.x = (1.0-t)*uPosition.x + t*iPosition.x;
@@ -30,6 +29,29 @@ void main(){
     gl_Position.z = 0.0;
     gl_Position.w = 1.0;
 
+    vec3 angles = radians(uTheta);
+    vec3 c = cos(angles);
+    vec3 s = sin(angles);
+
+    // Remember: thse matrices are column-major
+    mat4 rx = mat4( 1.0,  0.0,  0.0, 0.0,
+		    0.0,  c.x,  s.x, 0.0,
+		    0.0, -s.x,  c.x, 0.0,
+		    0.0,  0.0,  0.0, 1.0 );
+
+    mat4 ry = mat4( c.y, 0.0, -s.y, 0.0,
+		    0.0, 1.0,  0.0, 0.0,
+		    s.y, 0.0,  c.y, 0.0,
+		    0.0, 0.0,  0.0, 1.0 );
+
+
+    mat4 rz = mat4( c.z, s.z, 0.0, 0.0,
+		    -s.z,  c.z, 0.0, 0.0,
+		    0.0,  0.0, 1.0, 0.0,
+		    0.0,  0.0, 0.0, 1.0 );
+
+    //gl_Position = rz * ry * rx * uPosition; //Causes errors
+    //gl_Position.z = -gl_Position.z; //Rotation depends on this
 }
 
 </script>
