@@ -164,13 +164,37 @@ function init() {
        false, flatten(projectionMatrix));
 
     //modelViewMatrix = lookAt(eye, at, up);
+
     // redefine
-    modelViewMatrix = mat4(
+
+    modelViewMatrix = mat4();
+
+    modelViewMatrix[0][0] =  0.06100947187005636;
+    modelViewMatrix[0][1] = -0.1250879545479006;
+    modelViewMatrix[0][2] = -0.9902680687415701;
+    modelViewMatrix[0][3] =  0.0;
+
+    modelViewMatrix[1][0] = -0.9889497410995391;
+    modelViewMatrix[1][1] = -0.1418760731889821;
+    modelViewMatrix[1][2] = -0.04300685335652087;
+    modelViewMatrix[1][3] =  0.0;
+
+    modelViewMatrix[2][0] = -0.1351157056795823;
+    modelViewMatrix[2][1] =  0.9819491756111908;
+    modelViewMatrix[2][2] = -0.13236148456107444;
+    modelViewMatrix[2][3] =  0.0;
+
+    modelViewMatrix[3][0] =  0.0;
+    modelViewMatrix[3][1] =  0.0;
+    modelViewMatrix[3][2] =  0.0;
+    modelViewMatrix[3][3] =  1.0;
+
+    /*modelViewMatrix = mat4(
       0.06100947187005636 , -0.1250879545479006 , -0.9902680687415701  , 0.0 , 
      -0.9889497410995391  , -0.1418760731889821 , -0.04300685335652087 , 0.0 , 
      -0.1351157056795823  ,  0.9819491756111908 , -0.13236148456107444 , 0.0 , 
       0.0                 ,  0.0                ,  0.0                 , 1.0 
-    );
+    );*/
 
     gl.uniformMatrix4fv( gl.getUniformLocation(program,
                "uModelViewMatrix"), false, flatten(modelViewMatrix));
