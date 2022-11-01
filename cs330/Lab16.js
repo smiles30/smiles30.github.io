@@ -59,7 +59,7 @@ init();
 function quad(a, b, c, d) {
 
      var t1 = subtract(vertices[b], vertices[a]);
-     var t2 = subtract(vertices[c], vertices[a]); //shaded cube -> a=b ?
+     var t2 = subtract(vertices[c], vertices[a]);
      var normal = cross(t1, t2);
      normal = vec3(normal);
 
