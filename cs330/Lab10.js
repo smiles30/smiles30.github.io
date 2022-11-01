@@ -29,6 +29,34 @@ function init()
 
     colorCube();
 
+//draw axes
+
+//x
+    positions.push(vec4(0.0,0.0,0.0,1.0));
+    positions.push(vec4(1.0,0.0,0.0,1.0));
+
+//y
+    positions.push(vec4(0.0,0.0,0.0,1.0));
+    positions.push(vec4(0.0,1.0,0.0,1.0));
+
+//z
+    positions.push(vec4(0.0,0.0,0.0,1.0));
+    positions.push(vec4(0.0,0.0,1.0,1.0));
+
+//color axes
+
+//x
+    colors.push(vec4(1.0,0.0,0.0,1.0));
+    colors.push(vec4(1.0,0.0,0.0,1.0));
+
+//y
+    colors.push(vec4(1.0,0.0,0.0,1.0));
+    colors.push(vec4(0.0,1.0,0.0,1.0));
+
+//z
+    colors.push(vec4(0.0,1.0,0.0,1.0));
+    colors.push(vec4(0.0,0.0,1.0,1.0));
+
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(1.0, 1.0, 1.0, 1.0);
 
@@ -136,5 +164,8 @@ function render()
 
     //gl.drawElements(gl.TRIANGLE_FAN, numElements, gl.UNSIGNED_BYTE, 0);
     gl.drawArrays(gl.TRIANGLES, 0, numPositions);
+
+    gl.drawArrays(gl.LINES, numPositions, 6); //render axes
+
     requestAnimationFrame(render);
 }
