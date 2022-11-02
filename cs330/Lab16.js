@@ -63,7 +63,6 @@ function quad(a, b, c, d) {
      var normal = cross(t1, t2);
      normal = vec3(normal);
 
-
      positionsArray.push(vertices[a]);
      normalsArray.push(normal);
      positionsArray.push(vertices[b]);
