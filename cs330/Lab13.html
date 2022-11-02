@@ -6,17 +6,6 @@
 <title>Lab 13 Multiple Object Instance</title>
 <script id="vertex-shader" type="x-shader/x-vertex">
 
-/*
-
-The vertex shader has a built-in instance id (gl_InstanceID), which is added
-to the variable transX (which is initialized as -1 in the shader). The modelview
-matrix is sent to the vertex shader as a uniform variable (uModelViewMatrix),
-which is then updated in the shader, multiplied by the Scale and Tx matrices.
-The Tx matrix translates in the x axis, producing the next square to the side
-of the original. It utilizes the transX value and is used to generate MVlocal.
-
-*/
-
 #version 300 es
 
 in  vec4 aPosition;
@@ -30,6 +19,18 @@ uniform mat4 uProjectionMatrix;
 
 void main()
 {
+
+/*
+
+The vertex shader has a built-in instance id (gl_InstanceID), which is added
+to the variable transX (which is initialized as -1 in the shader). The modelview
+matrix is sent to the vertex shader as a uniform variable (uModelViewMatrix),
+which is then updated in the shader, multiplied by the Scale and Tx matrices.
+The Tx matrix translates in the x axis, producing the next square to the side
+of the original. It utilizes the transX value and is used to generate MVlocal.
+
+*/
+
    transX += gl_InstanceID;
     // Remeber: thse matrices are column-major
     mat4 Tx = mat4(1.0,  0.0,  0.0, 0.0,
