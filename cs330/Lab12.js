@@ -132,6 +132,8 @@ function render(){
     // since it is left multiplied
     modelViewMatrix = lookAt(eye, at , up);
     // update modelview matrix with required transformation(s)
+    modelViewMatrix = mult(modelViewMatrix, Tleft);
+    modelViewMatrix = mult(modelViewMatrix, S);
 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
     gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));
@@ -141,6 +143,7 @@ function render(){
     // just need to Scale, no translate, coord are already centered
     modelViewMatrix = lookAt(eye, at , up);
     // update modelview matrix with required transformation(s)
+    modelViewMatrix = mult(modelViewMatrix, S);
 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
     gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));
@@ -151,6 +154,8 @@ function render(){
     // since it is left multiplied
     modelViewMatrix = lookAt(eye, at , up);
     // update modelview matrix with required transformation(s)
+    modelViewMatrix = mult(modelViewMatrix, Tright);
+    modelViewMatrix = mult(modelViewMatrix, S);
 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
     gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));
