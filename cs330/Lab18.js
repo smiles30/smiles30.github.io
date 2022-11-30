@@ -3,12 +3,6 @@ var gl;
 var points;
 
 var flag = true;
-var xAxis = 0;
-var yAxis = 1;
-var zAxis = 2;
-var axis = xAxis;
-var theta = vec3(45.0, 45.0, 45.0);
-var thetaLoc;
 
 // isoceles triangles to form a tetrahedron
     points=[
@@ -94,6 +88,13 @@ function colorTetra()
     triangle(1,3,2,3);
 }
 
+var xAxis = 0;
+var yAxis = 1;
+var zAxis = 2;
+var axis = xAxis;
+var theta = vec3(45.0, 45.0, 45.0);
+var thetaLoc;
+
 function init()
 {
     var canvas = document.getElementById( "gl-canvas" );
@@ -143,35 +144,14 @@ function init()
 
     configureTexture(image2);
 
+
+    gl.uniform1i( gl.getUniformLocation(program, "uTextureMap"), 0);
+
 thetaLoc = gl.getUniformLocation(program, "uTheta");
 document.getElementById("ButtonX").onclick = function(){axis = xAxis;};
 document.getElementById("ButtonY").onclick = function(){axis = yAxis;};
 document.getElementById("ButtonZ").onclick = function(){axis = zAxis;};
 document.getElementById("ButtonT").onclick = function(){flag = !flag;};
-
-vec3 angles = radians(uTheta);
-vec3 c = cos(angles);
-vec3 s = sin(angles);
-//Remember: these matrices are column-major
-mat4 rx = mat4(1.0, 0.0, 0.0, 0.0,
-	0.0, c.x, s.x, 0.0,
-	0.0, -s.x, c.x, 0.0,
-	0.0, 0.0, 0.0, 1.0);
-mat4 ry = mat4(c.y, 0.0, -s.y, 0.0,
-	0.0, 1.0, 0.0, 0.0,
-	s.y, 0.0, c.y, 0.0,
-	0.0, 0.0, 0.0, 1.0);
-mat4 rz = mat4(c.z, s.z, 0.0, 0.0,
-	-s.z, c.z, 0.0, 0.0,
-	0.0, 0.0, 1.0, 0.0,
-	0.0, 0.0, 0.0, 1.0);
-gl_Position = rz * ry * rx * aPosition;
-gl_Position.z = -gl_Position.z;
-
-    gl.uniform1i( gl.getUniformLocation(program, "uTextureMap"), 0);
-
-if(flag) theta[axis] += 2.0;
-gl.uniform3fv(thetaLoc, theta);
 
     render();
 };
@@ -179,8 +159,11 @@ gl.uniform3fv(thetaLoc, theta);
 function render() {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-	gl.enable(gl.DEPTH_TEST);
-	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+if(flag) theta[axis] += 2.0;
+gl.uniform3fv(thetaLoc, theta);
+
+	//gl.enable(gl.DEPTH_TEST);
+	//gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     gl.drawArrays( gl.TRIANGLES, 0, positionsArray.length );
     requestAnimationFrame(render);
