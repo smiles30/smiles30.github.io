@@ -45,9 +45,9 @@ var positionsArray = [];
 var colorsArray = [];
 // define 4 different colors
 var vertexColors = [
-    vec4( 0.0  ,  0.0  ,  1.0  , 1.0 ) // blue
-    vec4( 1.0  ,  0.0  ,  0.0  , 1.0 ) // red
-    vec4( 1.0  ,  1.0  ,  0.0  , 1.0 ) // yellow
+    vec4( 0.0  ,  0.0  ,  1.0  , 1.0 ), // blue
+    vec4( 1.0  ,  0.0  ,  0.0  , 1.0 ), // red
+    vec4( 1.0  ,  1.0  ,  0.0  , 1.0 ), // yellow
     vec4( 0.0  ,  1.0  ,  0.0  , 1.0 ) // green
 ];
 
