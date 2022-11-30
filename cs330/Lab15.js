@@ -26,6 +26,9 @@ var lightAmbient = vec4(0.2, 0.2, 0.2, 1.0);
 var lightDiffuse = vec4(1.0, 1.0, 1.0, 1.0);
 var lightSpecular = vec4(1.0, 1.0, 1.0, 1.0);
 
+//Take turns uncommenting the various material settings
+//and noting the effect on the cube rendered.
+
 // original
 //
 var materialAmbient = vec4(1.0, 0.0, 1.0, 1.0);
