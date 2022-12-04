@@ -5,6 +5,8 @@ var shadedCube = function() {
 var canvas;
 var gl;
 
+var program;
+
 var numPositions = 36;
 
 var positionsArray = [];
@@ -21,109 +23,86 @@ var vertices = [
         vec4(0.5, -0.5, -0.5, 1.0)
     ];
 
-var lightPosition = vec4(1.0, 1.0, 1.0, 0.0);
-var lightAmbient = vec4(0.2, 0.2, 0.2, 1.0);
-var lightDiffuse = vec4(1.0, 1.0, 1.0, 1.0);
-var lightSpecular = vec4(1.0, 1.0, 1.0, 1.0);
-
-//Take turns uncommenting the various material settings
-//and noting the effect on the cube rendered.
-
-// original
-//
-var materialAmbient = vec4(1.0, 0.0, 1.0, 1.0);
-var materialDiffuse = vec4(1.0, 0.8, 0.0, 1.0);
-var materialSpecular = vec4(1.0, 0.8, 0.0, 1.0);
-var materialShininess = 100.0;
-//
-
-// black plastic
-/*
-var materialAmbient  = vec4(0.0 , 0.0 , 0.0 , 1.0);
-var materialDiffuse  = vec4(0.01 , 0.01 , 0.01 , 1.0);
-var materialSpecular = vec4(0.5 , 0.5 , 0.5, 1.0);
-var materialShininess = 32.0;
-*/
-
-// brass
-/*
-var materialAmbient  = vec4(0.329412 , 0.223529 , 0.027451 , 1.0);
-var materialDiffuse  = vec4(0.780392 , 0.568627 , 0.113725 , 1.0);
-var materialSpecular  = vec4(0.992157 , 0.941176 , 0.807843, 1.0);
-var materialShininess = 27.8974;
-*/
-
-// bronze
-/*
-var materialAmbient  = vec4(0.2125 , 0.1275 , 0.054 , 1.0);
-var materialDiffuse  = vec4(0.714 , 0.4284 , 0.18144 , 1.0);
-var materialSpecular  = vec4(0.393548 , 0.271906 , 0.166721, 1.0);
-var materialShininess = 25.6;
-*/
-
-// chrome
-/*
-var materialAmbient  = vec4(0.25 , 0.25 , 0.25 , 1.0);
-var materialDiffuse  = vec4(0.4 , 0.4 , 0.4 , 1.0);
-var materialSpecular  = vec4(0.774597 , 0.774597 , 0.774597 , 1.0);
-var materialShininess = 76.8;
-*/
-
-// copper
-/*
-var materialAmbient  = vec4(0.19125 , 0.0735 , 0.0225 , 1.0);
-var materialDiffuse  = vec4(0.7038 , 0.27048 , 0.0828 , 1.0);
-var materialSpecular  = vec4(0.256777 , 0.137622 , 0.086014 , 1.0);
-var materialShininess = 76.8;
-*/
-
-// gold
-/*
-var materialAmbient  = vec4(0.24725 , 0.1995 , 0.0745 , 1.0);
-var materialDiffuse  = vec4(0.75164 , 0.60648 , 0.22648 , 1.0);
-var materialSpecular  = vec4(0.628281 , 0.555802 , 0.366065 , 1.0);
-var materialShininess = 51.2;
-*/
-
-// pewter
-/*
-var materialAmbient  = vec4(0.10588 , 0.058824 , 0.113725 , 1.0);
-var materialDiffuse  = vec4(0.42745 , 0.470588 , 0.541176 , 1.0);
-var materialSpecular  = vec4(0.3333 , 0.3333 , 0.521569 , 1.0);
-var materialShininess = 9.84615;
-*/
-
-// silver
-/*
-var materialAmbient  = vec4(0.19225 , 0.19225 , 0.19225 , 1.0);
-var materialDiffuse  = vec4(0.50754 , 0.50754 , 0.50754 , 1.0);
-var materialSpecular  = vec4(0.508273 , 0.508273 , 0.508273 , 1.0);
-var materialShininess = 51.2;
-*/
-
-// polished silver
-/*
-var materialAmbient  = vec4(0.23125 , 0.23125 , 0.23125 , 1.0);
-var materialDiffuse  = vec4(0.2775 , 0.2775 , 0.2775 , 1.0);
-var materialSpecular  = vec4(0.773911 , 0.773911 , 0.773911 , 1.0);
-var materialShininess = 89.6;
-*/
-
-var ctm;
-var ambientColor, diffuseColor, specularColor;
-var modelViewMatrix, projectionMatrix;
-var viewerPos;
-var program;
-
 var xAxis = 0;
 var yAxis = 1;
 var zAxis = 2;
-var axis = 0;
-var theta = vec3(0, 0, 0);
+var axis = xAxis;
+var theta = vec3(45.0, 45.0, 45.0);
 
 var thetaLoc;
 
-var flag = false;
+var flag = true;
+var texture;
+
+var texSize = 64;
+var texCoordsArray = [];
+var texCoord = [
+// select the top left image
+        0   , 0  ,
+        0   , 0.5,
+        0.25, 0  ,
+        0   , 0.5,
+        0.25, 0.5,
+        0.25, 0  ,
+        // select the top middle image
+        0.25, 0  ,
+        0.5 , 0  ,
+        0.25, 0.5,
+        0.25, 0.5,
+        0.5 , 0  ,
+        0.5 , 0.5,
+        // select to top right image
+        0.5 , 0  ,
+        0.5 , 0.5,
+        0.75, 0  ,
+        0.5 , 0.5,
+        0.75, 0.5,
+        0.75, 0  ,
+        // select the bottom left image
+        0   , 0.5,
+        0.25, 0.5,
+        0   , 1  ,
+        0   , 1  ,
+        0.25, 0.5,
+        0.25, 1  ,
+        // select the bottom middle image
+        0.25, 0.5,
+        0.25, 1  ,
+        0.5 , 0.5,
+        0.25, 1  ,
+        0.5 , 1  ,
+        0.5 , 0.5,
+        // select the bottom right image
+        0.5 , 0.5,
+        0.75, 0.5,
+        0.5 , 1  ,
+        0.5 , 1  ,
+        0.75, 0.5,
+        0.75, 1
+];
+
+var positionsArray = [];
+var vertexColors = [
+	vec4(0.0, 0.0, 0.0, 1.0),  // black
+	vec4(0.0, 0.0, 0.0, 1.0),  // black
+	vec4(0.0, 0.0, 0.0, 1.0),  // black
+	vec4(0.0, 0.0, 0.0, 1.0),  // black
+	vec4(0.0, 0.0, 0.0, 1.0),  // black
+	vec4(0.0, 0.0, 0.0, 1.0),  // black
+	vec4(0.0, 0.0, 0.0, 1.0),  // black
+	vec4(0.0, 0.0, 0.0, 1.0)  // black
+];
+
+function configureTexture( image ) {
+	texture = gl.createTexture();
+	gl.bindTexture(gl.TEXTURE_2D, texture);
+	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
+	gl.generateMipmap(gl.TEXTURE_2D);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER,
+		gl.NEAREST_MIPMAP_LINEAR);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+	gl.uniform1i(gl.getUniformLocation(program, "uTextureMap"), 0);
+}
 
 init();
 
@@ -134,19 +113,24 @@ function quad(a, b, c, d) {
      var normal = cross(t1, t2);
      normal = vec3(normal);
 
-
      positionsArray.push(vertices[a]);
      normalsArray.push(normal);
+	texCoordsArray.push(texCoord[0]);
      positionsArray.push(vertices[b]);
      normalsArray.push(normal);
+	texCoordsArray.push(texCoord[1]);
      positionsArray.push(vertices[c]);
      normalsArray.push(normal);
+	texCoordsArray.push(texCoord[2]);
      positionsArray.push(vertices[a]);
      normalsArray.push(normal);
+	texCoordsArray.push(texCoord[3]);
      positionsArray.push(vertices[c]);
      normalsArray.push(normal);
+	texCoordsArray.push(texCoord[4]);
      positionsArray.push(vertices[d]);
      normalsArray.push(normal);
+	texCoordsArray.push(texCoord[5]);
 }
 
 
@@ -166,7 +150,6 @@ function init() {
     gl = canvas.getContext('webgl2');
     if (!gl) alert( "WebGL 2.0 isn't available");
 
-
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(1.0, 1.0, 1.0, 1.0);
 
@@ -180,13 +163,17 @@ function init() {
 
     colorCube();
 
-    var nBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, nBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(normalsArray), gl.STATIC_DRAW);
+// color array atrribute buffer
 
-    var normalLoc = gl.getAttribLocation(program, "aNormal");
-    gl.vertexAttribPointer(normalLoc, 3, gl.FLOAT, false, 0, 0);
-    gl.enableVertexAttribArray(normalLoc);
+    var cBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, cBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(vertexColors), gl.STATIC_DRAW);
+
+    var colorLoc = gl.getAttribLocation(program, "aColor");
+    gl.vertexAttribPointer(colorLoc, 4, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(colorLoc);
+
+//positions buffer
 
     var vBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, vBuffer);
@@ -196,35 +183,25 @@ function init() {
     gl.vertexAttribPointer(positionLoc, 4, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(positionLoc);
 
-    thetaLoc = gl.getUniformLocation(program, "theta");
+// texture buffer
 
-    viewerPos = vec3(0.0, 0.0, -20.0);
+    var tBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, tBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(texCoordsArray), gl.STATIC_DRAW);
+    var texCoordLoc = gl.getAttribLocation(program, "aTexCoord");
+    gl.vertexAttribPointer(texCoordLoc, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(texCoordLoc);
 
-    projectionMatrix = ortho(-1, 1, -1, 1, -100, 100);
+var image = document.getElementById("texImage");
+configureTexture(image);
 
-    var ambientProduct = mult(lightAmbient, materialAmbient);
-    var diffuseProduct = mult(lightDiffuse, materialDiffuse);
-    var specularProduct = mult(lightSpecular, materialSpecular);
+    thetaLoc = gl.getUniformLocation(program, "uTheta");
 
     document.getElementById("ButtonX").onclick = function(){axis = xAxis;};
     document.getElementById("ButtonY").onclick = function(){axis = yAxis;};
     document.getElementById("ButtonZ").onclick = function(){axis = zAxis;};
     document.getElementById("ButtonT").onclick = function(){flag = !flag;};
 
-    gl.uniform4fv(gl.getUniformLocation(program, "uAmbientProduct"),
-       ambientProduct);
-    gl.uniform4fv(gl.getUniformLocation(program, "uDiffuseProduct"),
-       diffuseProduct );
-    gl.uniform4fv(gl.getUniformLocation(program, "uSpecularProduct"),
-       specularProduct );
-    gl.uniform4fv(gl.getUniformLocation(program, "uLightPosition"),
-       lightPosition );
-
-    gl.uniform1f(gl.getUniformLocation(program,
-       "uShininess"), materialShininess);
-
-    gl.uniformMatrix4fv( gl.getUniformLocation(program, "uProjectionMatrix"),
-       false, flatten(projectionMatrix));
     render();
 }
 
@@ -234,18 +211,8 @@ function render(){
 
     if(flag) theta[axis] += 2.0;
 
-    modelViewMatrix = mat4();
-    modelViewMatrix = mult(modelViewMatrix, rotate(theta[xAxis], vec3(1, 0, 0)));
-    modelViewMatrix = mult(modelViewMatrix, rotate(theta[yAxis], vec3(0, 1, 0)));
-    modelViewMatrix = mult(modelViewMatrix, rotate(theta[zAxis], vec3(0, 0, 1)));
-
-    //console.log(modelView);
-
-    gl.uniformMatrix4fv(gl.getUniformLocation(program,
-            "uModelViewMatrix"), false, flatten(modelViewMatrix));
-
-    gl.drawArrays(gl.TRIANGLES, 0, numPositions);
-
+gl.uniform3fv(thetaLoc, theta);
+gl.drawArrays(gl.TRIANGLES, 0, positionsArray.length);
 
     requestAnimationFrame(render);
 }
