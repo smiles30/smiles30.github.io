@@ -331,6 +331,10 @@ gl.drawArrays(gl.TRIANGLES, 0, positionsArray.length);
     requestAnimationFrame(render);
 }
 
+function rollDice(){
+
+}
+
 }
 
 shadedCube();
