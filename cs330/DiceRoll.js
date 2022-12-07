@@ -13,7 +13,7 @@ var positionsArray = [];
 var normalsArray = [];
 
 function setCoords(){
-var positions = var positions = new Float32Array(
+var positions = new Float32Array(
     [
     -0.5, -0.5,  -0.5,
     -0.5,  0.5,  -0.5,
