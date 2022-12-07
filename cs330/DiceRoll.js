@@ -10,15 +10,16 @@ var program;
 var numPositions = 36;
 
 var positionsArray = [];
+var normalsArray = [];
 
 var vertices = [
-        vec4(-0.5, -0.5,  0.5, 1.0),
+        /*vec4(-0.5, -0.5,  0.5, 1.0),
         vec4(-0.5,  0.5,  0.5, 1.0),
         vec4(0.5,  0.5,  0.5, 1.0),
         vec4(0.5, -0.5,  0.5, 1.0),
         vec4(-0.5, -0.5, -0.5, 1.0),
         vec4(-0.5,  0.5, -0.5, 1.0),
-        vec4(0.5,  0.5, -0.5, 1.0),
+        vec4(0.5,  0.5, -0.5, 1.0),*/
         vec4(0.5, -0.5, -0.5, 1.0)
     ];
 
@@ -117,22 +118,22 @@ function quad(a, b, c, d) {
 
      positionsArray.push(vertices[a]);
      normalsArray.push(normal);
-	texCoordsArray.push(texCoord[0]);
+	//texCoordsArray.push(texCoord[0]);
      positionsArray.push(vertices[b]);
      normalsArray.push(normal);
-	texCoordsArray.push(texCoord[1]);
+	//texCoordsArray.push(texCoord[1]);
      positionsArray.push(vertices[c]);
      normalsArray.push(normal);
-	texCoordsArray.push(texCoord[2]);
+	//texCoordsArray.push(texCoord[2]);
      positionsArray.push(vertices[a]);
      normalsArray.push(normal);
-	texCoordsArray.push(texCoord[3]);
+	//texCoordsArray.push(texCoord[3]);
      positionsArray.push(vertices[c]);
      normalsArray.push(normal);
-	texCoordsArray.push(texCoord[4]);
+	//texCoordsArray.push(texCoord[4]);
      positionsArray.push(vertices[d]);
      normalsArray.push(normal);
-	texCoordsArray.push(texCoord[5]);
+	//texCoordsArray.push(texCoord[5]);
 }
 
 
