@@ -331,6 +331,6 @@ gl.drawArrays(gl.TRIANGLES, 0, positionsArray.length);
     requestAnimationFrame(render);
 }
 
-}
+
 
 shadedCube();
