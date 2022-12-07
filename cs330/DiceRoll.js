@@ -1,7 +1,5 @@
 "use strict";
 
-var shadedCube = function() {
-
 var canvas;
 var gl;
 
@@ -13,13 +11,13 @@ var positionsArray = [];
 var normalsArray = [];
 
 var vertices = [
-        /*vec4(-0.5, -0.5,  0.5, 1.0),
+        vec4(-0.5, -0.5,  0.5, 1.0),
         vec4(-0.5,  0.5,  0.5, 1.0),
         vec4(0.5,  0.5,  0.5, 1.0),
         vec4(0.5, -0.5,  0.5, 1.0),
         vec4(-0.5, -0.5, -0.5, 1.0),
         vec4(-0.5,  0.5, -0.5, 1.0),
-        vec4(0.5,  0.5, -0.5, 1.0),*/
+        vec4(0.5,  0.5, -0.5, 1.0),
         vec4(0.5, -0.5, -0.5, 1.0)
     ];
 
@@ -32,54 +30,6 @@ var theta = vec3(45.0, 45.0, 45.0);
 var thetaLoc;
 
 var flag = true;
-var texture;
-
-var texSize = 64;
-var texCoordsArray = [];
-var texCoord = [
-// select the top left image
-        0   , 0  ,
-        0   , 0.5,
-        0.25, 0  ,
-        0   , 0.5,
-        0.25, 0.5,
-        0.25, 0  ,
-        // select the top middle image
-        0.25, 0  ,
-        0.5 , 0  ,
-        0.25, 0.5,
-        0.25, 0.5,
-        0.5 , 0  ,
-        0.5 , 0.5,
-        // select to top right image
-        0.5 , 0  ,
-        0.5 , 0.5,
-        0.75, 0  ,
-        0.5 , 0.5,
-        0.75, 0.5,
-        0.75, 0  ,
-        // select the bottom left image
-        0   , 0.5,
-        0.25, 0.5,
-        0   , 1  ,
-        0   , 1  ,
-        0.25, 0.5,
-        0.25, 1  ,
-        // select the bottom middle image
-        0.25, 0.5,
-        0.25, 1  ,
-        0.5 , 0.5,
-        0.25, 1  ,
-        0.5 , 1  ,
-        0.5 , 0.5,
-        // select the bottom right image
-        0.5 , 0.5,
-        0.75, 0.5,
-        0.5 , 1  ,
-        0.5 , 1  ,
-        0.75, 0.5,
-        0.75, 1
-];
 
 var vertexColors = [
 	vec4(0.0, 0.0, 1.0, 1.0),  // blue
@@ -91,21 +41,6 @@ var vertexColors = [
 	vec4(0.0, 0.0, 1.0, 1.0),  // blue
 	vec4(0.0, 0.0, 1.0, 1.0)  // blue
 ];
-
-function configureTexture( image ) {
-	texture = gl.createTexture();
-	gl.bindTexture(gl.TEXTURE_2D, texture);
-	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
-       gl.generateMipmap(gl.TEXTURE_2D);
-       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-
-	gl.generateMipmap(gl.TEXTURE_2D);
-	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST_MIPMAP_LINEAR);
-	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-	gl.uniform1i(gl.getUniformLocation(program, "uTextureMap"), 0);
-}
 
 init();
 
@@ -180,7 +115,7 @@ function init() {
 
     var vBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, vBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(positionsArray), gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, flatten(vertices), gl.STATIC_DRAW);
 
     var positionLoc = gl.getAttribLocation(program, "aPosition");
     gl.vertexAttribPointer(positionLoc, 4, gl.FLOAT, false, 0, 0);
@@ -203,7 +138,7 @@ function render(){
     if(flag) theta[axis] += 2.0;
 
 gl.uniform3fv(thetaLoc, theta);
-gl.drawArrays(gl.TRIANGLES, 0, positionsArray.length);
+gl.drawElements(gl.TRIANGLE_FAN, numPositions, gl.UNSIGNED_BYTE, 0);
 
     requestAnimationFrame(render);
 }
@@ -216,7 +151,3 @@ function rollDice(){
 	//For remainder of timer, slows to a stop
 		
 }
-
-}
-
-shadedCube();
