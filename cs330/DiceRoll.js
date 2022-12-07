@@ -10,107 +10,6 @@ var program;
 var numPositions = 36;
 
 var positionsArray = [];
-var normalsArray = [];
-
-function setCoords(){
-var positions = new Float32Array(
-    [
-    -0.5, -0.5,  -0.5,
-    -0.5,  0.5,  -0.5,
-     0.5, -0.5,  -0.5,
-    -0.5,  0.5,  -0.5,
-     0.5,  0.5,  -0.5,
-     0.5, -0.5,  -0.5,
-
-    -0.5, -0.5,   0.5,
-     0.5, -0.5,   0.5,
-    -0.5,  0.5,   0.5,
-    -0.5,  0.5,   0.5,
-     0.5, -0.5,   0.5,
-     0.5,  0.5,   0.5,
-
-    -0.5,   0.5, -0.5,
-    -0.5,   0.5,  0.5,
-     0.5,   0.5, -0.5,
-    -0.5,   0.5,  0.5,
-     0.5,   0.5,  0.5,
-     0.5,   0.5, -0.5,
-
-    -0.5,  -0.5, -0.5,
-     0.5,  -0.5, -0.5,
-    -0.5,  -0.5,  0.5,
-    -0.5,  -0.5,  0.5,
-     0.5,  -0.5, -0.5,
-     0.5,  -0.5,  0.5,
-
-    -0.5,  -0.5, -0.5,
-    -0.5,  -0.5,  0.5,
-    -0.5,   0.5, -0.5,
-    -0.5,  -0.5,  0.5,
-    -0.5,   0.5,  0.5,
-    -0.5,   0.5, -0.5,
-
-     0.5,  -0.5, -0.5,
-     0.5,   0.5, -0.5,
-     0.5,  -0.5,  0.5,
-     0.5,  -0.5,  0.5,
-     0.5,   0.5, -0.5,
-     0.5,   0.5,  0.5,
-
-    ]);
-  gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
-
-// Fill the buffer with texture coordinates the cube.
-  gl.bufferData(
-      gl.ARRAY_BUFFER,
-      new Float32Array(
-        [
-        // select the top left image
-        0   , 0  ,
-        0   , 0.5,
-        0.25, 0  ,
-        0   , 0.5,
-        0.25, 0.5,
-        0.25, 0  ,
-        // select the top middle image
-        0.25, 0  ,
-        0.5 , 0  ,
-        0.25, 0.5,
-        0.25, 0.5,
-        0.5 , 0  ,
-        0.5 , 0.5,
-        // select to top right image
-        0.5 , 0  ,
-        0.5 , 0.5,
-        0.75, 0  ,
-        0.5 , 0.5,
-        0.75, 0.5,
-        0.75, 0  ,
-        // select the bottom left image
-        0   , 0.5,
-        0.25, 0.5,
-        0   , 1  ,
-        0   , 1  ,
-        0.25, 0.5,
-        0.25, 1  ,
-        // select the bottom middle image
-        0.25, 0.5,
-        0.25, 1  ,
-        0.5 , 0.5,
-        0.25, 1  ,
-        0.5 , 1  ,
-        0.5 , 0.5,
-        // select the bottom right image
-        0.5 , 0.5,
-        0.75, 0.5,
-        0.5 , 1  ,
-        0.5 , 1  ,
-        0.75, 0.5,
-        0.75, 1  ,
-
-      ]),
-      gl.STATIC_DRAW);
-}
 
 var vertices = [
         vec4(-0.5, -0.5,  0.5, 1.0),
@@ -192,23 +91,14 @@ var vertexColors = [
 	vec4(0.0, 0.0, 1.0, 1.0)  // blue
 ];
 
-  function isPowerOf2(value) {
-    return (value & (value - 1)) === 0;
-  }
-
 function configureTexture( image ) {
 	texture = gl.createTexture();
 	gl.bindTexture(gl.TEXTURE_2D, texture);
 	gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
-if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
-       // Yes, it's a power of 2. Generate mips.
        gl.generateMipmap(gl.TEXTURE_2D);
-    } else {
-       // No, it's not a power of 2. Turn of mips and set wrapping to clamp to edge
        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    }
 
 	gl.generateMipmap(gl.TEXTURE_2D);
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST_MIPMAP_LINEAR);
@@ -295,20 +185,6 @@ function init() {
     gl.vertexAttribPointer(positionLoc, 4, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(positionLoc);
 
-setCoords();
-
-// texture buffer
-
-    /*var tBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, tBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(texCoordsArray), gl.STATIC_DRAW);
-    var texCoordLoc = gl.getAttribLocation(program, "aTexCoord");
-    gl.vertexAttribPointer(texCoordLoc, 2, gl.FLOAT, false, 0, 0);
-    gl.enableVertexAttribArray(texCoordLoc);
-
-var image = document.getElementById("texImage");
-configureTexture(image);*/
-
     thetaLoc = gl.getUniformLocation(program, "uTheta");
 
     document.getElementById("ButtonX").onclick = function(){axis = xAxis;};
@@ -332,7 +208,12 @@ gl.drawArrays(gl.TRIANGLES, 0, positionsArray.length);
 }
 
 function rollDice(){
-
+	//Randomizer for timer
+		
+	//Rolls randomly on z axis for half of the timer
+		
+	//For remainder of timer, slows to a stop
+		
 }
 
 }
