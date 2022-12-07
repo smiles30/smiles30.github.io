@@ -182,14 +182,14 @@ var texCoord = [
 ];
 
 var vertexColors = [
-	vec4(0.0, 0.0, 0.0, 1.0),  // black
-	vec4(0.0, 0.0, 0.0, 1.0),  // black
-	vec4(0.0, 0.0, 0.0, 1.0),  // black
-	vec4(0.0, 0.0, 0.0, 1.0),  // black
-	vec4(0.0, 0.0, 0.0, 1.0),  // black
-	vec4(0.0, 0.0, 0.0, 1.0),  // black
-	vec4(0.0, 0.0, 0.0, 1.0),  // black
-	vec4(0.0, 0.0, 0.0, 1.0)  // black
+	vec4(0.0, 0.0, 1.0, 1.0),  // blue
+	vec4(0.0, 0.0, 1.0, 1.0),  // blue
+	vec4(0.0, 0.0, 1.0, 1.0),  // blue
+	vec4(0.0, 0.0, 1.0, 1.0),  // blue
+	vec4(0.0, 0.0, 1.0, 1.0),  // blue
+	vec4(0.0, 0.0, 1.0, 1.0),  // blue
+	vec4(0.0, 0.0, 1.0, 1.0),  // blue
+	vec4(0.0, 0.0, 1.0, 1.0)  // blue
 ];
 
   function isPowerOf2(value) {
@@ -299,7 +299,7 @@ setCoords();
 
 // texture buffer
 
-    var tBuffer = gl.createBuffer();
+    /*var tBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, tBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, flatten(texCoordsArray), gl.STATIC_DRAW);
     var texCoordLoc = gl.getAttribLocation(program, "aTexCoord");
@@ -307,7 +307,7 @@ setCoords();
     gl.enableVertexAttribArray(texCoordLoc);
 
 var image = document.getElementById("texImage");
-configureTexture(image);
+configureTexture(image);*/
 
     thetaLoc = gl.getUniformLocation(program, "uTheta");
 
