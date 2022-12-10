@@ -4,6 +4,7 @@ var canvas;
 var gl;
 
 var program;
+var timeOutVar;
 
 var vertices = [
         vec3(-0.5, -0.5,  0.5),
@@ -98,7 +99,11 @@ function init() {
     document.getElementById("ButtonX").onclick = function(){axis = xAxis;};
     document.getElementById("ButtonY").onclick = function(){axis = yAxis;};
     document.getElementById("ButtonZ").onclick = function(){axis = zAxis;};
-    document.getElementById("ButtonT").onclick = function(){flag = !flag;};
+    document.getElementById("ButtonT").onclick = function(){
+	flag = !flag;
+	theta[axis] += 5.0;
+	//timeOutVar = setInterval(rollDice, 3000);
+	};
 
     render();
 }
@@ -107,7 +112,11 @@ function render(){
 
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    if(flag) theta[axis] += 2.0;
+    if(flag){
+	//theta[axis] += 5.0;
+	alert(theta[axis]);
+	timeOutVar = setInterval(rollDice, 3000);
+	}
 
 gl.uniform3fv(thetaLoc, theta);
 //gl.drawArrays(gl.TRIANGLES, 0, numPositions);
@@ -117,10 +126,26 @@ gl.drawElements(gl.TRIANGLE_FAN, numElements, gl.UNSIGNED_BYTE, 0);
 }
 
 function rollDice(){
+	theta[axis] -= 1.0;
+	alert(theta[axis]);
 	//Randomizer for timer
-		
+	var randAxis = Math.floor(Math.random() * 3));
+	switch(randAxis){
+		case 0:
+			axis = xAxis;
+			break;
+		case 1:
+			axis = yAxis;
+			break;
+		default:
+			axis = zAxis;
+	}
 	//Rolls randomly on z axis for half of the timer
 		
 	//For remainder of timer, slows to a stop
+
+	if(theta[axis] <= 0.0){
+		clearInterval(timeOutVar);
+	}
 		
 }
