@@ -16,6 +16,16 @@ var axis = xAxis;
 var theta = [0,0,0];
 var numElements = 29;
 
+var indices = [
+    1, 0, 3, 2, 255,
+    2, 3, 7, 6, 255,
+    3, 0, 4, 7, 255,
+    6, 5, 1, 2, 255,
+    4, 5, 6, 7, 255,
+    5, 4, 0, 1
+];
+
+
 var thetaLoc;
 
 var flag = false;
@@ -40,7 +50,11 @@ function init() {
     program = webglUtils.createProgramFromScripts(gl, ["vertex-shader-3d", "fragment-shader-3d"])
     gl.useProgram(program);
 
+    // array element buffer
 
+    var iBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, iBuffer);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint8Array(indices), gl.STATIC_DRAW);
 
 var positionLocation = gl.getAttribLocation(program, "a_position");
 var texcoordLocation = gl.getAttribLocation(program, "a_texcoord");
@@ -294,7 +308,7 @@ function render(){
 
 gl.uniform3fv(thetaLoc, theta);
 //gl.drawArrays(gl.TRIANGLES, 0, numPositions);
-//gl.drawElements(gl.TRIANGLE_FAN, numElements, gl.UNSIGNED_BYTE, 0);
+gl.drawElements(gl.TRIANGLE_FAN, numElements, gl.UNSIGNED_BYTE, 0);
 
     requestAnimationFrame(render);
 }
