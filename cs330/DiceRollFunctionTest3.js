@@ -191,7 +191,7 @@ function degToRad(d) {
 
       // Get the starting time.
 
-      //var then = 0;
+      var then = 0;
 
     // Turn on the position attribute
 
@@ -307,7 +307,7 @@ function degToRad(d) {
 
     // Draw the geometry.
 
-    gl.drawArrays(gl.TRIANGLES, 0, 6 * 6);
+    //gl.drawArrays(gl.TRIANGLES, 0, 6 * 6);
 
     thetaLoc = gl.getUniformLocation(program, "uTheta");
 
@@ -337,9 +337,11 @@ function render(){
 	//timeOutVar = setInterval(rollDice, 25);
 	}
 
+    gl.drawArrays(gl.TRIANGLES, 0, 6 * 6);
+
 gl.uniform3fv(thetaLoc, theta);
 //gl.drawArrays(gl.TRIANGLES, 0, numPositions);
-gl.drawElements(gl.TRIANGLE_FAN, numElements, gl.UNSIGNED_BYTE, 0);
+//gl.drawElements(gl.TRIANGLE_FAN, numElements, gl.UNSIGNED_BYTE, 0);
 
     requestAnimationFrame(render);
 }
