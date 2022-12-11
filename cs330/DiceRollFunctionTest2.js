@@ -7,7 +7,7 @@ var program;
 var timeOutVar;
 var startSpinTime = 30.00;
 var spinTime = 0.00;
-var spinVariant = 0.10;
+var spinVariant = 0.50;
 
 var vertices = [
         vec3(-0.5, -0.5,  0.5),
@@ -108,7 +108,7 @@ function init() {
 		theta[xAxis] = startSpinTime;
 		theta[yAxis] = startSpinTime;
 		theta[zAxis] = startSpinTime;
-		timeOutVar = setInterval(rollDice, 1000);
+		timeOutVar = setInterval(rollDice, 100);
 	}
 	};
 
@@ -122,7 +122,7 @@ function render(){
     if(flag){
 	//theta[axis] += 5.0;
 	//alert(theta[axis]);
-	//timeOutVar = setInterval(rollDice, 100);
+	//timeOutVar = setInterval(rollDice, 25);
 	}
 
 gl.uniform3fv(thetaLoc, theta);
@@ -133,9 +133,8 @@ gl.drawElements(gl.TRIANGLE_FAN, numElements, gl.UNSIGNED_BYTE, 0);
 }
 
 function rollDice(){
-	//spinTime += spinVariant;
-	spinTime += 5;
-	theta[axis] += (startSpinTime - spinTime);
+	spinTime += spinVariant;
+	theta[axis] += (startSpinTime + spinTime);
 	//theta[xAxis] += (startSpinTime - spinTime);
 	//theta[yAxis] += (startSpinTime - spinTime);
 	//theta[zAxis] += (startSpinTime - spinTime);
@@ -156,18 +155,27 @@ function rollDice(){
 		
 	//For remainder of timer, slows to a stop
 
-	/*if(spinTime >= 25.00){
+	if(spinTime >= 25.00){
 		spinVariant+=1;
 	}else if(spinTime >= 20.00){
 		spinVariant+=0.5;
 	}else if(spinTime >= 15.00){
 		spinVariant+=0.25;
-	}*/
+	}
 
 	if(spinTime >= 30.0){
 		clearInterval(timeOutVar);
-		//flag = !flag;
 		alert("Spin time exceeded!");
+		resetAllVars();
 	}
 		
+}
+
+function resetAllVars(){
+	flag = !flag;
+	startSpinTime = 30.00;
+	spinTime = 0.00;
+	spinVariant = 0.50;
+	axis = xAxis;
+	theta = [0,0,0];
 }
