@@ -36,6 +36,10 @@ var positionBuffer;
 var texcoordBuffer;
 var texture;
 var image;
+var fieldOfViewRadians;
+var modelXRotationRadians;
+var modelYRotationRadians;
+
 
 var flag = false;
 
@@ -156,11 +160,11 @@ function degToRad(d) {
 
    
 
-      var fieldOfViewRadians = degToRad(60);
+      fieldOfViewRadians = degToRad(60);
 
-      var modelXRotationRadians = degToRad(0);
+      modelXRotationRadians = degToRad(0);
 
-      var modelYRotationRadians = degToRad(0);
+      modelYRotationRadians = degToRad(0);
 
    
 
