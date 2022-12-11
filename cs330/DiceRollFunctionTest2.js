@@ -133,10 +133,12 @@ gl.drawElements(gl.TRIANGLE_FAN, numElements, gl.UNSIGNED_BYTE, 0);
 }
 
 function rollDice(){
-	spinTime += spinVariant;
-	theta[xAxis] += (startSpinTime - spinTime);
-	theta[yAxis] += (startSpinTime - spinTime);
-	theta[zAxis] += (startSpinTime - spinTime);
+	//spinTime += spinVariant;
+	spinTime += 5;
+	theta[axis] += (startSpinTime - spinTime);
+	//theta[xAxis] += (startSpinTime - spinTime);
+	//theta[yAxis] += (startSpinTime - spinTime);
+	//theta[zAxis] += (startSpinTime - spinTime);
 	//alert(spinTime);
 	//Randomizer for timer
 	var randAxis = Math.floor(Math.random() * 3);
@@ -154,17 +156,17 @@ function rollDice(){
 		
 	//For remainder of timer, slows to a stop
 
-	if(spinTime >= 25.00){
+	/*if(spinTime >= 25.00){
 		spinVariant+=1;
 	}else if(spinTime >= 20.00){
 		spinVariant+=0.5;
 	}else if(spinTime >= 15.00){
 		spinVariant+=0.25;
-	}
+	}*/
 
 	if(spinTime >= 30.0){
 		clearInterval(timeOutVar);
-		flag = !flag;
+		//flag = !flag;
 		alert("Spin time exceeded!");
 	}
 		
