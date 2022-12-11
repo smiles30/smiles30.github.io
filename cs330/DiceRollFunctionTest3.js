@@ -177,6 +177,9 @@ function degToRad(d) {
 
 function render(){
 
+    modelYRotationRadians += -0.7 * deltaTime;
+    modelXRotationRadians += -0.4 * deltaTime;
+
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
 // Turn on the position attribute
