@@ -40,13 +40,12 @@ function init() {
     program = webglUtils.createProgramFromScripts(gl, ["vertex-shader-3d", "fragment-shader-3d"])
     gl.useProgram(program);
 
+
+
 var positionLocation = gl.getAttribLocation(program, "a_position");
+var texcoordLocation = gl.getAttribLocation(program, "a_texcoord");
 
-    var texcoordLocation = gl.getAttribLocation(program, "a_texcoord");
-
- 
-
-    // lookup uniforms
+ // lookup uniforms
 
     var matrixLocation = gl.getUniformLocation(program, "u_matrix");
 
@@ -56,8 +55,8 @@ var positionLocation = gl.getAttribLocation(program, "a_position");
 
 //positions buffer
 
-    var vBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, vBuffer);
+    var positionBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
     setGeomtry(gl);
 
     /*var positionLoc = gl.getAttribLocation(program, "a_position");
@@ -155,7 +154,7 @@ function degToRad(d) {
 
     // Bind the position buffer.
 
-    gl.bindBuffer(gl.ARRAY_BUFFER, vBuffer);
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
  
 
