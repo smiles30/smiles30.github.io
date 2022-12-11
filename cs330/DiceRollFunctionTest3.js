@@ -311,9 +311,9 @@ function degToRad(d) {
 
     thetaLoc = gl.getUniformLocation(program, "uTheta");
 
-    document.getElementById("ButtonX").onclick = function(){axis = xAxis;};
-    document.getElementById("ButtonY").onclick = function(){axis = yAxis;};
-    document.getElementById("ButtonZ").onclick = function(){axis = zAxis;};
+    //document.getElementById("ButtonX").onclick = function(){axis = xAxis;};
+    //document.getElementById("ButtonY").onclick = function(){axis = yAxis;};
+    //document.getElementById("ButtonZ").onclick = function(){axis = zAxis;};
     document.getElementById("ButtonT").onclick = function(){
 	if(flag!=true){
 		flag = !flag;
@@ -501,102 +501,102 @@ function setGeometry(gl) {
 
   function setTexcoords(gl) {
 
-    gl.bufferData(
+  gl.bufferData(
 
-        gl.ARRAY_BUFFER,
+      gl.ARRAY_BUFFER,
 
-        new Float32Array(
+      new Float32Array(
 
-          [
+        [
 
-          // select the top left image
+        // select the top left image
 
-          0   , 0  ,
+        0.10 , 0.05  ,
 
-          0   , 0.5,
+        0.10  , 0.47,
 
-          0.5, 0  ,
+        0.38, 0.05 ,
 
-          0   , 0.5,
+        0.10  , 0.47,
 
-          0.5, 0.5,
+        0.38, 0.47,
 
-          0.5, 0  ,
+        0.38, 0.05 ,
 
-          // select the top middle image
+        // select the top middle image
 
-          0.25, 0  ,
+         0.38, 0.07  ,
 
-          0.5 , 0  ,
+         0.66 , 0.07  ,
 
-          0.25, 0.5,
+         0.38, 0.48,
 
-          0.25, 0.5,
+         0.38, 0.48,
 
-          0.5 , 0  ,
+         0.66 , 0.07  ,
 
-          0.5 , 0.5,
+         0.66 , 0.48,
 
-          // select to top right image
+        // select to top right image
 
-          0.5 , 0  ,
+         0.66 , 0.0  ,
 
-          0.5 , 0.5,
+         0.66 , 0.5,
 
-          0.75, 0  ,
+         0.96,   0.0  ,
 
-          0.5 , 0.5,
+         0.66 , 0.5,
 
-          0.75, 0.5,
+         0.96, 0.5,
 
-          0.75, 0  ,
+         0.96, 0.0  ,
 
-          // select the bottom left image
+        // select the bottom left image
 
-          0   , 0.5,
+         0.11, 0.48,
 
-          0.25, 0.5,
+         0.38, 0.48,
 
-          0   , 1  ,
+         0.11, 0.92  ,
 
-          0   , 1  ,
+         0.11, 0.92  ,
 
-          0.25, 0.5,
+         0.38, 0.48,
 
-          0.25, 1  ,
+         0.38, 0.92 ,
 
-          // select the bottom middle image
+        // select the bottom middle image
 
-          0.25, 0.5,
+        0.39, 0.5,
 
-          0.25, 1  ,
+        0.39, 0.9 ,
 
-          0.5 , 0.5,
+        0.665 , 0.5,
 
-          0.25, 1  ,
+        0.39, 0.9  ,
 
-          0.5 , 1  ,
+        0.665 , 0.9  ,
 
-          0.5 , 0.5,
+        0.665 , 0.5,
 
-          // select the bottom right image
+        // select the bottom right image
 
-          0.5 , 0.5,
+        0.66 , 0.5,
 
-          0.75, 0.5,
+        0.95, 0.5,
 
-          0.5 , 1  ,
+        0.66, 0.9 ,
 
-          0.5 , 1  ,
+        0.66 ,0.9,
 
-          0.75, 0.5,
+        0.95, 0.5,
 
-          0.75, 1  ,
+        0.95, 0.9,
 
  
 
-        ]),
+      ]),
 
-        gl.STATIC_DRAW);
+      gl.STATIC_DRAW);
 
-  }
+}
