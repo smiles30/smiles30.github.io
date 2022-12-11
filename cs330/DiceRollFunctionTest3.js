@@ -29,6 +29,13 @@ var indices = [
 var thetaLoc;
 var positionLocation;
 var texcoordLocation;
+var iBuffer;
+var matrixLocation;
+var textureLocation;
+var positionBuffer;
+var texcoordBuffer;
+var texture;
+var image;
 
 var flag = false;
 
@@ -54,7 +61,7 @@ function init() {
 
     // array element buffer
 
-    var iBuffer = gl.createBuffer();
+    iBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, iBuffer);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint8Array(indices), gl.STATIC_DRAW);
 
@@ -63,15 +70,14 @@ texcoordLocation = gl.getAttribLocation(program, "a_texcoord");
 
  // lookup uniforms
 
-    var matrixLocation = gl.getUniformLocation(program, "u_matrix");
-
-    var textureLocation = gl.getUniformLocation(program, "u_texture");
+    matrixLocation = gl.getUniformLocation(program, "u_matrix");
+    textureLocation = gl.getUniformLocation(program, "u_texture");
 
 
 
 //positions buffer
 
-    var positionBuffer = gl.createBuffer();
+    positionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
     setGeometry(gl);
 
@@ -81,7 +87,7 @@ texcoordLocation = gl.getAttribLocation(program, "a_texcoord");
 
 // provide texture coordinates for the rectangle.
 
-    var texcoordBuffer = gl.createBuffer();
+    texcoordBuffer = gl.createBuffer();
 
     gl.bindBuffer(gl.ARRAY_BUFFER, texcoordBuffer);
 
@@ -93,7 +99,7 @@ texcoordLocation = gl.getAttribLocation(program, "a_texcoord");
 
     // Create a texture.
 
-    var texture = gl.createTexture();
+    texture = gl.createTexture();
 
     gl.bindTexture(gl.TEXTURE_2D, texture);
 
@@ -105,7 +111,7 @@ texcoordLocation = gl.getAttribLocation(program, "a_texcoord");
 
     // Asynchronously load an image
 
-    var image = new Image();
+    image = new Image();
 
     image.src = "Dice2.jpeg";
 
