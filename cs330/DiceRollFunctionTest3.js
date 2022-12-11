@@ -339,6 +339,8 @@ function resetAllVars(){
 	spinVariant = 0.50;
 	axis = xAxis;
 	theta = [0,0,0];
+	modelYRotationRadians = degToRad(0);
+        modelXRotationRadians = degToRad(0);
 }
 
 function winningSide(){
