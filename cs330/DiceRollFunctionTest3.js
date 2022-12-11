@@ -27,6 +27,8 @@ var indices = [
 
 
 var thetaLoc;
+var positionLocation;
+var texcoordLocation;
 
 var flag = false;
 
@@ -56,8 +58,8 @@ function init() {
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, iBuffer);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint8Array(indices), gl.STATIC_DRAW);
 
-var positionLocation = gl.getAttribLocation(program, "a_position");
-var texcoordLocation = gl.getAttribLocation(program, "a_texcoord");
+positionLocation = gl.getAttribLocation(program, "a_position");
+texcoordLocation = gl.getAttribLocation(program, "a_texcoord");
 
  // lookup uniforms
 
