@@ -294,7 +294,7 @@ function render(){
 
 gl.uniform3fv(thetaLoc, theta);
 //gl.drawArrays(gl.TRIANGLES, 0, numPositions);
-//gl.drawElements(gl.TRIANGLE_FAN, numElements, gl.UNSIGNED_BYTE, 0);
+gl.drawElements(gl.TRIANGLE_FAN, numElements, gl.UNSIGNED_BYTE, 0);
 
     requestAnimationFrame(render);
 }
