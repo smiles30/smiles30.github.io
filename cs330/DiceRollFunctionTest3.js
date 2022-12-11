@@ -57,7 +57,7 @@ var texcoordLocation = gl.getAttribLocation(program, "a_texcoord");
 
     var positionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    setGeomtry(gl);
+    setGeomtery(gl);
 
     /*var positionLoc = gl.getAttribLocation(program, "a_position");
     gl.vertexAttribPointer(positionLoc, 4, gl.FLOAT, false, 0, 0);
