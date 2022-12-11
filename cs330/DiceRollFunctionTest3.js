@@ -325,7 +325,8 @@ function rollDice(){
 
 	if(spinTime >= 30.0){
 		clearInterval(timeOutVar);
-		alert("Spin time exceeded!");
+		//alert("Spin time exceeded!");
+		winningSide();
 		resetAllVars();
 	}
 		
@@ -340,13 +341,21 @@ function resetAllVars(){
 	theta = [0,0,0];
 }
 
-/*function winningSide(){
+function winningSide(){
 	if(theta[xAxis] > -50 && theta[xAxis] < 50 && theta[yAxis] < 50 && theta[zAxis] < 50){
 		alert("1");
 	}else if(theta[xAxis] > 100 && theta[yAxis] < 50 && theta[zAxis] < 50){
 		alert("6");
-	}else if(theta[axis] < 50 && theta[yAxi
-}*/ //6, 1 - 2, 5 - 3, 4
+	}else if(theta[yAxis] > 50){
+		alert("3");
+	}else if(theta[yAxis] < 0){
+		alert("4");
+	}else if(theta[xAxis] < -50 && theta[xAxis] > -150){
+		alert("5");
+	}else{
+		alert("2");
+	}
+} //6, 1 - 2, 5 - 3, 4
 //1 -> left = 5, right = 2, up = 3, down = 4, opposite = 6
 
 function setGeometry(gl) {
