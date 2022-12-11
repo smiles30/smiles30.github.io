@@ -9,17 +9,6 @@ var startSpinTime = 30.00;
 var spinTime = 0.00;
 var spinVariant = 0.50;
 
-var vertices = [
-        vec3(-0.5, -0.5,  0.5),
-        vec3(-0.5,  0.5,  0.5),
-        vec3(0.5,  0.5,  0.5),
-        vec3(0.5, -0.5,  0.5),
-        vec3(-0.5, -0.5, -0.5),
-        vec3(-0.5,  0.5, -0.5),
-        vec3(0.5,  0.5, -0.5),
-        vec3(0.5, -0.5, -0.5)
-    ];
-
 var xAxis = 0;
 var yAxis = 1;
 var zAxis = 2;
@@ -30,26 +19,6 @@ var numElements = 29;
 var thetaLoc;
 
 var flag = false;
-
-var vertexColors = [
-	vec4(0.0, 0.0, 0.0, 1.0), //black
-	vec4(0.0, 0.0, 0.0, 1.0), //black
-	vec4(1.0, 0.0, 0.0, 1.0), //red
-	vec4(1.0, 0.0, 0.0, 1.0), //red
-	vec4(0.0, 1.0, 0.0, 1.0), //green
-	vec4(0.0, 1.0, 0.0, 1.0), //green
-	vec4(0.0, 1.0, 1.0, 1.0), //cyan
-	vec4(0.0, 1.0, 1.0, 1.0) //cyan
-];
-
-var indices = [
-    1, 0, 3, 2, 255,
-    2, 3, 7, 6, 255,
-    3, 0, 4, 7, 255,
-    6, 5, 1, 2, 255,
-    4, 5, 6, 7, 255,
-    5, 4, 0, 1
-];
 
 init();
 
@@ -84,31 +53,16 @@ var positionLocation = gl.getAttribLocation(program, "a_position");
     var textureLocation = gl.getUniformLocation(program, "u_texture");
 
 
-    // array element buffer
-
-    var iBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, iBuffer);
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint8Array(indices), gl.STATIC_DRAW);
-
-// color array atrribute buffer
-
-    /*var cBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, cBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(vertexColors), gl.STATIC_DRAW);
-
-    var colorLoc = gl.getAttribLocation(program, "aColor");
-    gl.vertexAttribPointer(colorLoc, 4, gl.FLOAT, false, 0, 0);
-    gl.enableVertexAttribArray(colorLoc);*/
 
 //positions buffer
 
     var vBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, vBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, flatten(vertices), gl.STATIC_DRAW);
+    setGeomtry(gl);
 
-    var positionLoc = gl.getAttribLocation(program, "a_position");
+    /*var positionLoc = gl.getAttribLocation(program, "a_position");
     gl.vertexAttribPointer(positionLoc, 4, gl.FLOAT, false, 0, 0);
-    gl.enableVertexAttribArray(positionLoc);
+    gl.enableVertexAttribArray(positionLoc);*/
 
 // provide texture coordinates for the rectangle.
 
