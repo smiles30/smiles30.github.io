@@ -291,7 +291,7 @@ function degToRad(d) {
 	}
 	};
 
-    render();
+    requestAnimationFrame(render);
 }
 
 function render(){
