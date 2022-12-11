@@ -191,7 +191,7 @@ function degToRad(d) {
 
       // Get the starting time.
 
-      var then = 0;
+      //var then = 0;
 
     // Turn on the position attribute
 
@@ -287,15 +287,15 @@ function degToRad(d) {
 
  
 
-    var matrix = m4.xRotate(viewProjectionMatrix, modelXRotationRadians);
+    //var matrix = m4.xRotate(viewProjectionMatrix, modelXRotationRadians);
 
-    matrix = m4.yRotate(matrix, modelYRotationRadians);
+    //matrix = m4.yRotate(matrix, modelYRotationRadians);
 
  
 
     // Set the matrix.
 
-    gl.uniformMatrix4fv(matrixLocation, false, matrix);
+    //gl.uniformMatrix4fv(matrixLocation, false, matrix);
 
  
 
@@ -339,7 +339,7 @@ function render(){
 
 gl.uniform3fv(thetaLoc, theta);
 //gl.drawArrays(gl.TRIANGLES, 0, numPositions);
-gl.drawElements(gl.TRIANGLE_FAN, numElements, gl.UNSIGNED_BYTE, 0);
+//gl.drawElements(gl.TRIANGLE_FAN, numElements, gl.UNSIGNED_BYTE, 0);
 
     requestAnimationFrame(render);
 }
