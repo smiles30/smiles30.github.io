@@ -179,3 +179,12 @@ function resetAllVars(){
 	axis = xAxis;
 	theta = [0,0,0];
 }
+
+/*function winningSide(){
+	if(theta[xAxis] > -50 && theta[xAxis] < 50 && theta[yAxis] < 50 && theta[zAxis] < 50){
+		alert("1");
+	}else if(theta[xAxis] > 100 && theta[yAxis] < 50 && theta[zAxis] < 50){
+		alert("6");
+	}else if(theta[axis] < 50 && theta[yAxi
+}*/ //6, 1 - 2, 5 - 3, 4
+//1 -> left = 5, right = 2, up = 3, down = 4, opposite = 6
