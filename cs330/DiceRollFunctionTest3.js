@@ -158,19 +158,22 @@ function degToRad(d) {
 
       // Get the starting time.
 
-      var then = 0;
+      //var then = 0;
 
-    // Turn on the position attribute
+    requestAnimationFrame(render);
+}
+
+function render(){
+
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+// Turn on the position attribute
 
     gl.enableVertexAttribArray(positionLocation);
-
- 
 
     // Bind the position buffer.
 
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-
- 
 
     // Tell the position attribute how to get data out of positionBuffer (ARRAY_BUFFER)
 
@@ -188,19 +191,13 @@ function degToRad(d) {
 
         positionLocation, size, type, normalize, stride, offset);
 
- 
-
     // Turn on the texcoord attribute
 
     gl.enableVertexAttribArray(texcoordLocation);
 
- 
-
     // bind the texcoord buffer.
 
     gl.bindBuffer(gl.ARRAY_BUFFER, texcoordBuffer);
-
- 
 
     // Tell the texcoord attribute how to get data out of texcoordBuffer (ARRAY_BUFFER)
 
@@ -215,72 +212,44 @@ function degToRad(d) {
     var offset = 0;        // start at the beginning of the buffer
 
     gl.vertexAttribPointer(
-
         texcoordLocation, size, type, normalize, stride, offset);
-
- 
 
     // Compute the projection matrix
 
     var aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
 
     var projectionMatrix =
-
         m4.perspective(fieldOfViewRadians, aspect, 1, 2000);
 
- 
-
     var cameraPosition = [0, 0, 2];
-
     var up = [0, 1, 0];
-
     var target = [0, 0, 0];
-
- 
 
     // Compute the camera's matrix using look at.
 
     var cameraMatrix = m4.lookAt(cameraPosition, target, up);
 
- 
-
     // Make a view matrix from the camera matrix.
 
     var viewMatrix = m4.inverse(cameraMatrix);
-
- 
-
     var viewProjectionMatrix = m4.multiply(projectionMatrix, viewMatrix);
-
- 
-
-    //var matrix = m4.xRotate(viewProjectionMatrix, modelXRotationRadians);
-
-    //matrix = m4.yRotate(matrix, modelYRotationRadians);
-
- 
+    var matrix = m4.xRotate(viewProjectionMatrix, modelXRotationRadians);
+    matrix = m4.yRotate(matrix, modelYRotationRadians);
 
     // Set the matrix.
 
-    //gl.uniformMatrix4fv(matrixLocation, false, matrix);
-
- 
+    gl.uniformMatrix4fv(matrixLocation, false, matrix);
 
     // Tell the shader to use texture unit 0 for u_texture
 
     gl.uniform1i(textureLocation, 0);
 
- 
-
     // Draw the geometry.
 
-    //gl.drawArrays(gl.TRIANGLES, 0, 6 * 6);
+    gl.drawArrays(gl.TRIANGLES, 0, 6 * 6);
 
     thetaLoc = gl.getUniformLocation(program, "uTheta");
 
-    //document.getElementById("ButtonX").onclick = function(){axis = xAxis;};
-    //document.getElementById("ButtonY").onclick = function(){axis = yAxis;};
-    //document.getElementById("ButtonZ").onclick = function(){axis = zAxis;};
     document.getElementById("ButtonT").onclick = function(){
 	if(flag!=true){
 		flag = !flag;
@@ -291,20 +260,13 @@ function degToRad(d) {
 	}
 	};
 
-    requestAnimationFrame(render);
-}
-
-function render(){
-
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
     if(flag){
 	//theta[axis] += 5.0;
 	//alert(theta[axis]);
 	//timeOutVar = setInterval(rollDice, 25);
 	}
 
-    gl.drawArrays(gl.TRIANGLES, 0, 6 * 6);
+    //gl.drawArrays(gl.TRIANGLES, 0, 6 * 6);
 
 gl.uniform3fv(thetaLoc, theta);
 //gl.drawArrays(gl.TRIANGLES, 0, numPositions);
