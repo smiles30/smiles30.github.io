@@ -254,15 +254,15 @@ function degToRad(d) {
 
  
 
-    var matrix = m4.xRotate(viewProjectionMatrix, modelXRotationRadians);
+    //var matrix = m4.xRotate(viewProjectionMatrix, modelXRotationRadians);
 
-    matrix = m4.yRotate(matrix, modelYRotationRadians);
+    //matrix = m4.yRotate(matrix, modelYRotationRadians);
 
  
 
     // Set the matrix.
 
-    gl.uniformMatrix4fv(matrixLocation, false, matrix);
+    //gl.uniformMatrix4fv(matrixLocation, false, matrix);
 
  
 
