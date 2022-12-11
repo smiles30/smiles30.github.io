@@ -289,6 +289,8 @@ gl.drawElements(gl.TRIANGLE_FAN, numElements, gl.UNSIGNED_BYTE, 0);
 
 function rollDice(){
 	spinTime += spinVariant;
+	modelYRotationRadians += (startSpinTime + spinTime);
+        modelXRotationRadians += (startSpinTime + spinTime);
 	theta[axis] += (startSpinTime + spinTime);
 	//theta[xAxis] += (startSpinTime - spinTime);
 	//theta[yAxis] += (startSpinTime - spinTime);
