@@ -344,11 +344,12 @@ function resetAllVars(){
 }
 
 function winningSide(){
+	alert("x: " + theta[xAxis] + " y: " + theta[yAxis] + " z: " + theta[zAxis]);
 	if(theta[xAxis] > -50 && theta[xAxis] < 50 && theta[yAxis] < 50 && theta[zAxis] < 50){
 		alert("1");
 	}else if(theta[xAxis] > 100 && theta[yAxis] < 50 && theta[zAxis] < 50){
 		alert("6");
-	}else if(theta[yAxis] > 50){
+	}else if(theta[yAxis] > 50 ){
 		alert("3");
 	}else if(theta[yAxis] < 0){
 		alert("4");
