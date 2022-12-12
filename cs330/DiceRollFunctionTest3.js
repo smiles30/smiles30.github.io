@@ -326,7 +326,7 @@ function rollDice(){
 	if(spinTime >= 30.0){
 		clearInterval(timeOutVar);
 		//alert("Spin time exceeded!");
-		winningSide();
+		//winningSide();
 		resetAllVars();
 	}
 		
@@ -343,7 +343,7 @@ function resetAllVars(){
         modelXRotationRadians = degToRad(0);
 }
 
-function winningSide(){
+/*function winningSide(){
 	//alert("x: " + theta[xAxis] + " y: " + theta[yAxis] + " z: " + theta[zAxis]);
 	if(){
 		alert("1");
@@ -358,7 +358,7 @@ function winningSide(){
 	}else{
 		alert("2");
 	}
-} //6, 1 - 2, 5 - 3, 4
+}*/ //6, 1 - 2, 5 - 3, 4
 //1 -> left = 5, right = 2, up = 3, down = 4, opposite = 6
 
 function setGeometry(gl) {
