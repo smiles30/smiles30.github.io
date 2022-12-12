@@ -344,16 +344,16 @@ function resetAllVars(){
 }
 
 function winningSide(){
-	alert("x: " + theta[xAxis] + " y: " + theta[yAxis] + " z: " + theta[zAxis]);
-	if(theta[xAxis] > -50 && theta[xAxis] < 50 && theta[yAxis] < 50 && theta[zAxis] < 50){
+	//alert("x: " + theta[xAxis] + " y: " + theta[yAxis] + " z: " + theta[zAxis]);
+	if(){
 		alert("1");
-	}else if(theta[xAxis] > 100 && theta[yAxis] < 50 && theta[zAxis] < 50){
+	}else if(){
 		alert("6");
-	}else if(theta[yAxis] > 50 ){
+	}else if(){
 		alert("3");
-	}else if(theta[yAxis] < 0){
+	}else if(){
 		alert("4");
-	}else if(theta[xAxis] < -50 && theta[xAxis] > -150){
+	}else if(){
 		alert("5");
 	}else{
 		alert("2");
